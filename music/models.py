@@ -22,7 +22,7 @@ class Song(models.Model):
     #is a variable inside song class and its key is the 'album's' primary key
     file_type = models.CharField(max_length=10)
     song_title = models.CharField(max_length=250)
-    is_favorite = models.BooleanField(default=False)
+    # is_favorite = models.BooleanField(default=False)
 
     def __str__(self):
         return  self.song_title

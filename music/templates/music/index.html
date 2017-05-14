@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MusicPage</title>
+</head>
+<body>
+
+
+{% if all_albums %}
+<h3>Here are all my albums!!</h3>
+    <ul>
+        {% for album in all_albums %}
+        <li><a href="{% url 'music:detail' album.id %}">{{ album.album_title }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% else %}
+
+    <h3>You don't have any albums!</h3>
+{% endif %}
+</body>
+</html>
+
+
+{#/music/{{ album.id }}/#}
+{#above was a hard-coded url which will be a pain to edit in all at once in 1000 pages#}
+{#so we make them dynamic as in href above and i don't understand the syntax right now.#}

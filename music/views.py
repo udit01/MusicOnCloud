@@ -57,6 +57,18 @@ class UserFormView(View):
             user.save()
             #now the user are in the data base
 
+            # return user object if credentials are correct
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+
+                if user.is_active:
+                    login(request,user)
+                    #request.user.xyz to print details..
+                    return redirect('music:index')
+
+        return render(request, self.template_name, {'form': form})
+
 
 
 

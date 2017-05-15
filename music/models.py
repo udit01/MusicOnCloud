@@ -2,6 +2,8 @@
 # from __future__ import unicode_literals
 
 from django.db import models
+from django.core.urlresolvers import reverse
+
 
 # Create your models here.
 # Django automatically assigns unique ID numbers or a primary or unique key
@@ -10,9 +12,11 @@ class Album(models.Model):
     artist = models.CharField(max_length=250)
     album_title = models.CharField(max_length=500)
     genre = models.CharField(max_length=100)
-    album_logo = models.CharField(max_length=1000)
-    #I dont know how to upload pics yet so we will take urls from internet
+    album_logo = models.FileField()
 
+    #I dont know how to upload pics yet so we will take urls from internet
+    def get_absolute_url(self):
+        return reverse('music:detail',kwargs={ 'pk' : self.pk})
     def __str__(self):
         return self.album_title + ' - ' + self.artist
 

@@ -5,12 +5,15 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Music{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
 
     <link rel="stylesheet" type="text/css" href="{% static 'music/bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Satisfy">
     <link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}"  >
+
     <script src="{% static 'music/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'music/bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'music/js/main.js' %}"></script>
 
 </head>
 
@@ -51,7 +54,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="">
-                        <a href="#">
+                        <a href="{% url 'music:album-add' %}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Album
                         </a>
                     </li>

@@ -1,7 +1,11 @@
-from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.core.urlresolvers import reverse_lazy
-from  .models import Album
+from django.shortcuts import render,redirect
+from django.contrib.auth import authenticate, login
+from django.views import generic
+from django.views.generic import View
+from .models import Album
+from .form import UserForm
 #we are going to make generic views..
 
 class IndexView(generic.ListView):
@@ -27,7 +31,31 @@ class AlbumDelete(DeleteView):
     success_url = reverse_lazy('music:index')
 
 
+class UserFormView(View):
+    form_class = UserForm
+    template_name = 'music/registration_form.html'
 
+    # if method==get or method==post logic will work
+
+    #blank form
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form':form})
+
+    #user has posted something and we need to save
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+
+            user = form.save(commit=False)
+
+            # we want clean (normalized) data example DATE FORMAT
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user.set_password(password)#to change user password
+            user.save()
+            #now the user are in the data base
 
 
 
